@@ -5,23 +5,26 @@ public class Sundial extends JFrame{
 
 	SunEvent sun_event = new SunEvent(this);
 
+
 	JLabel d = new JLabel("Declination [degrees]:",JLabel.RIGHT);
 	JTextField declination = new JTextField(4);
 	JLabel l = new JLabel("Latitude [degrees]:",JLabel.RIGHT);
 	JTextField latitude = new JTextField(4);
 
+
 	JButton draw = new JButton("Draw");
 
 
-	JTextField rise = new JTextField("The sun doesn't rise.",13);
+	JTextField rise = new JTextField(13);
 
 	Sundial(){
 		super("Sundial");
 		setSize(600,600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setBackground(Color.pink);
-
+		
 		draw.addActionListener(sun_event);
+
 
 		FlowLayout flo = new FlowLayout(FlowLayout.LEFT);
 		setLayout(flo);
@@ -35,7 +38,7 @@ public class Sundial extends JFrame{
 
 		setVisible(true);
 	}
-
+	
 	public static void main(String[] args){
 		Sundial sun = new Sundial();
 	}
