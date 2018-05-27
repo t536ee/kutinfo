@@ -6,9 +6,11 @@ import java.lang.Math;
 public class SunEvent implements ActionListener {
 
 	Sundial gui;
+
 	double declination_degrees;
 	double fi_degrees;
 	double[][] arr = new double[25][2];
+	DrawingTable table = new DrawingTable(arr);
 	
 	public SunEvent (Sundial in){
 		gui=in;
@@ -24,19 +26,27 @@ public class SunEvent implements ActionListener {
 
 			if (allElementsZero(arr)==true){
 				gui.rise.setText("The sun doesn't rise.");
+				gui.setVisible(true);
 			}
 			
-			else {
+			else {	
+
 				DrawingTable table = new DrawingTable(arr);
 				gui.add(table);
+				table.setBounds(310,20,250,250);
 				gui.setVisible(true);
-				System.out.println("helloka");
 			}
 		}
 		if (command == "Reset"){
 				gui.declination.setText("0,0");
 				gui.latitude.setText("0,0");
 				gui.rise.setText(" ");
+				JPanel panel = new JPanel();
+				panel.setBackground(Color.pink);
+				gui.add(panel);
+				panel.setBounds(310,20,250,250);
+				gui.setVisible(true);
+
 		}
 	}
 
@@ -135,16 +145,13 @@ class DrawingTable extends JPanel{
 		@Override
 		public void paintComponent(Graphics g){
 			super.paintComponent(g);
-			super.setBackground(Color.green);
-			setSize(50,50);
-			System.out.println("aaa");
-
-			
-			
+			super.setBackground(Color.cyan);
+			setSize(250,250);
+				
 			for(int i=0; i<25;i++){
-				int a=(int)(20*this.arr[i][0]*Math.cos(this.arr[i][1]));
-				int b=(int)(20*this.arr[i][0]*Math.sin(this.arr[i][1]));
-				g.drawLine(0,0,a,b);
+				int a=(int)(50*this.arr[i][0]*Math.cos(this.arr[i][1]));
+				int b=(int)(50*this.arr[i][0]*Math.sin(this.arr[i][1]));
+				g.drawLine(125,125,125+a,125+b);
 			}
 		}
 	}
