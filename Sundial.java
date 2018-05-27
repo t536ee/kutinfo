@@ -3,6 +3,8 @@ import javax.swing.*;
 
 public class Sundial extends JFrame{
 
+	SunEvent sun_event = new SunEvent(this);
+
 	JLabel d = new JLabel("Declination [degrees]:",JLabel.RIGHT);
 	JTextField declination = new JTextField(4);
 	JLabel l = new JLabel("Latitude [degrees]:",JLabel.RIGHT);
@@ -18,6 +20,8 @@ public class Sundial extends JFrame{
 		setSize(600,600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setBackground(Color.pink);
+
+		draw.addActionListener(sun_event);
 
 		FlowLayout flo = new FlowLayout(FlowLayout.LEFT);
 		setLayout(flo);
