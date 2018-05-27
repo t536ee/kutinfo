@@ -5,40 +5,54 @@ public class Sundial extends JFrame{
 
 	SunEvent sun_event = new SunEvent(this);
 
-	JLabel d = new JLabel("Declination [degrees]:",JLabel.RIGHT);
-	JTextField declination = new JTextField(4);
-	JLabel l = new JLabel("Latitude [degrees]:",JLabel.RIGHT);
-	JTextField latitude = new JTextField(4);
+	JLabel d = new JLabel("Declination [degrees]:",JLabel.LEFT);
+	JTextField declination = new JTextField("0.0",4);
+	JLabel l = new JLabel("Latitude [degrees]:",JLabel.LEFT);
+	JTextField latitude = new JTextField("0.0",4);
 
 	JButton draw = new JButton("Draw");
 	JButton reset = new JButton("Reset");
 
-	JTextField rise = new JTextField(13);
+	JLabel rise = new JLabel(" ",JLabel.CENTER);
 
 	Sundial(){
 		super("Sundial");
-		setSize(600,600);
+		setSize(580,310);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setBackground(Color.pink);
 		
 		draw.addActionListener(sun_event);
+		reset.addActionListener(sun_event);
+		FlowLayout flo = new FlowLayout();
 
+		setLayout(null);
 
-		FlowLayout flo = new FlowLayout(FlowLayout.LEFT);
-		setLayout(flo);
+		d.setBounds(40,20,200,30);
+		declination.setBounds(240,20,50,30);
+		l.setBounds(40,70,200,40);
+		latitude.setBounds(240,70,50,30);
+
+		draw.setBounds(40,140,100,70);
+		reset.setBounds(190,140,100,70);
+
+		rise.setBounds(40,230,250,40);
+
+		draw.setBackground(Color.green);
+		reset.setBackground(Color.red);
+
+		rise.setFont(new Font("Serif",Font.ITALIC,20));		
+		rise.setOpaque(false);
+
 		add(d);
 		add(declination);
 		add(l);
 		add(latitude);
 		add(draw);
-		add(rise);
 		add(reset);
-		rise.setEnabled(false);
-
+		add(rise);
 		setVisible(true);
 	}
 
-	
 	public static void main(String[] args){
 		Sundial sun = new Sundial();
 	}
