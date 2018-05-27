@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 import java.lang.Math;
 
@@ -18,29 +17,19 @@ public class SunEvent implements ActionListener {
 		String command = evt.getActionCommand();
 
 		if (command == "Draw"){
-			declination_degrees = getNum(gui.declination.getText());
-			fi_degrees = getNum(gui.latitude.getText());
+			declination_degrees = getNum(gui.declination);
+			fi_degrees = getNum(gui.latitude);
 			arr = shadow(declination_degrees,fi_degrees);
 
 			if (allElementsZero(arr)==true){
 				gui.rise.setText("The sun doesn't rise.");
 			}
-			
-			else {
-				DrawingTable table = new DrawingTable(arr);
-				gui.add(table);
-				System.out.println("hello");
-			}
 		}
-		if (command == "Reset"){
-				gui.declination.setText("0,0");
-				gui.latitude.setText("0,0");
-				gui.rise.setText(" ");
-		}
+
 	}
 
-	double getNum(String text){
-		double num = Double.parseDouble(text);		
+	double getNum(JTextField field){
+		double num = Double.parseDouble(field.getText());
 		return num;
 	}
 
@@ -121,27 +110,3 @@ public class SunEvent implements ActionListener {
 		}
 	}
 }
-
-class DrawingTable extends JPanel{
-	
-		private double[][] arr;
-		DrawingTable(double[][] arr){
-			super();
-			this.arr = arr;
-			
-		}
-		
-		@Override
-		protected void paintComponent(Graphics g){
-			super.paintComponent(g);
-			super.setBackground(Color.gray);
-			System.out.println("aaa");
-			
-			for(int i=0; i<25;i++){
-				int a=(int)(60*this.arr[i][0]*Math.cos(this.arr[i][1]));
-				int b=(int)(60*this.arr[i][0]*Math.sin(this.arr[i][1]));
-				g.drawLine(400,400,400+a,400+b);
-				System.out.println(a+" "+b);
-			}
-		}
-	}
