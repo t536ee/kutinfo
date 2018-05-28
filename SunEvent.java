@@ -21,7 +21,7 @@ public class SunEvent implements ActionListener {
 	public void actionPerformed(ActionEvent evt){
 		String command = evt.getActionCommand();
 
-		if (command == "Draw"){
+		if (command.equals("Draw")){
 			declination_degrees = getNum(gui.declination.getText());
 			fi_degrees = getNum(gui.latitude.getText());
 			arr = shadow(declination_degrees,fi_degrees);
@@ -38,27 +38,31 @@ public class SunEvent implements ActionListener {
 				gui.setVisible(true);
 			}
 		}
-		if (command == "Reset"){
-			gui.declination.setText("0,0");
-			gui.latitude.setText("0,0");
+		if (command.equals("Reset")){
+			gui.declination.setText("0.0");
+			gui.latitude.setText("0.0");
 			gui.rise.setText(" ");
 			JPanel panel = new JPanel();
 			panel.setBackground(Color.pink);
 			gui.add(panel);
 			panel.setBounds(310,20,250,250);
 			gui.setVisible(true);
+			for(int i=0; i<arr.length; i++){
+				for(int j=0; j<arr[i].length; j++){
+					arr[i][j] = 0;
+				}
+			}
 
 		}
-		if (command == "proba"){
+		if ( command.equals(gui.write_file.getText()) ){
 			try {
-				PrintWriter print_writer = new PrintWriter("ShadowLength_Azimuth.txt");
+				PrintWriter print_writer = new PrintWriter("ShadowLength_Azimuth.dat");
 
 				for(int i=0; i<arr.length; i++){
 					Object x = arr[i][0];
 					Object y = arr[i][1];
 					print_writer.println(x + "\t" + y);
 				}
-System.out.println("Siker");
 				print_writer.flush();
 
 			} catch (Exception ex) {
@@ -68,7 +72,7 @@ System.out.println("Siker");
 	}
 
 	double getNum(String text){
-		double num = Double.parseDouble(text);		
+		double num = Double.parseDouble(text.replace(',','.'));		
 		return num;
 	}
 
