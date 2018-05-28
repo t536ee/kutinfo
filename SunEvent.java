@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.lang.Math;
+import java.io.PrintWriter;
+import java.io.File;
 
 public class SunEvent implements ActionListener {
 
@@ -30,7 +32,6 @@ public class SunEvent implements ActionListener {
 			}
 			
 			else {	
-
 				DrawingTable table = new DrawingTable(arr);
 				gui.add(table);
 				table.setBounds(310,20,250,250);
@@ -38,15 +39,31 @@ public class SunEvent implements ActionListener {
 			}
 		}
 		if (command == "Reset"){
-				gui.declination.setText("0,0");
-				gui.latitude.setText("0,0");
-				gui.rise.setText(" ");
-				JPanel panel = new JPanel();
-				panel.setBackground(Color.pink);
-				gui.add(panel);
-				panel.setBounds(310,20,250,250);
-				gui.setVisible(true);
+			gui.declination.setText("0,0");
+			gui.latitude.setText("0,0");
+			gui.rise.setText(" ");
+			JPanel panel = new JPanel();
+			panel.setBackground(Color.pink);
+			gui.add(panel);
+			panel.setBounds(310,20,250,250);
+			gui.setVisible(true);
 
+		}
+		if (command == "proba"){
+			try {
+				PrintWriter print_writer = new PrintWriter("ShadowLength_Azimuth.txt");
+
+				for(int i=0; i<arr.length; i++){
+					Object x = arr[i][0];
+					Object y = arr[i][1];
+					print_writer.println(x + "\t" + y);
+				}
+System.out.println("Siker");
+				print_writer.flush();
+
+			} catch (Exception ex) {
+			ex.printStackTrace();
+		    	  }
 		}
 	}
 
@@ -58,8 +75,8 @@ public class SunEvent implements ActionListener {
 	boolean allElementsZero (double[][] arr){
 		boolean allZero = true;
 		outerloop:
-		for(int i=0; i<arr.length; i++){ //i.sor
-			for(int j=0; j<arr[i].length; j++){ //j.oszlop
+		for(int i=0; i<arr.length; i++){ 
+			for(int j=0; j<arr[i].length; j++){
 				if (arr[i][j]!=0)
 					allZero = false;
 					break outerloop;	
@@ -69,8 +86,10 @@ public class SunEvent implements ActionListener {
 	}
 
 	double[][] shadow(double declination_degrees, double fi_degrees) {
+		
 		double decl = Math.toRadians(declination_degrees);
 		double fi = Math.toRadians(fi_degrees);
+		
 		if(decl<fi-Math.PI/2.0){
 			return arr;
 		}
