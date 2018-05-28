@@ -15,6 +15,8 @@ public class Sundial extends JFrame{
 
 	JLabel rise = new JLabel(" ",JLabel.CENTER);
 
+	JButton write_file = new JButton("proba");
+
 	Sundial(){
 		super("Sundial");
 		setSize(580,310);
@@ -23,7 +25,7 @@ public class Sundial extends JFrame{
 		
 		draw.addActionListener(sun_event);
 		reset.addActionListener(sun_event);
-		FlowLayout flo = new FlowLayout();
+		write_file.addActionListener(sun_event);
 
 		setLayout(null);
 
@@ -37,9 +39,11 @@ public class Sundial extends JFrame{
 
 		rise.setBounds(40,230,250,40);
 
+		write_file.setBounds(400,280,100,20);
+
 		draw.setBackground(Color.green);
 		reset.setBackground(Color.red);
-
+	
 		rise.setFont(new Font("Serif",Font.ITALIC,20));		
 		rise.setOpaque(false);
 
@@ -50,6 +54,7 @@ public class Sundial extends JFrame{
 		add(draw);
 		add(reset);
 		add(rise);
+		add(write_file);
 		setVisible(true);
 	}
 
