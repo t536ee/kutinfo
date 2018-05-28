@@ -15,11 +15,12 @@ public class Sundial extends JFrame{
 
 	JLabel rise = new JLabel(" ",JLabel.CENTER);
 
-	JButton write_file = new JButton("proba");
+	ImageIcon file_picture = new ImageIcon("file.png");
+	JButton write_file = new JButton(file_picture);
 
 	Sundial(){
 		super("Sundial");
-		setSize(580,310);
+		setSize(580,315);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setBackground(Color.pink);
 		
@@ -33,17 +34,14 @@ public class Sundial extends JFrame{
 		declination.setBounds(240,20,50,30);
 		l.setBounds(40,70,200,40);
 		latitude.setBounds(240,70,50,30);
-
 		draw.setBounds(40,140,100,70);
 		reset.setBounds(190,140,100,70);
-
 		rise.setBounds(40,230,250,40);
-
-		write_file.setBounds(400,280,100,20);
+		write_file.setBounds(532,280,28,28);
 
 		draw.setBackground(Color.green);
 		reset.setBackground(Color.red);
-	
+
 		rise.setFont(new Font("Serif",Font.ITALIC,20));		
 		rise.setOpaque(false);
 
@@ -56,6 +54,7 @@ public class Sundial extends JFrame{
 		add(rise);
 		add(write_file);
 		setVisible(true);
+
 	}
 
 	public static void main(String[] args){
